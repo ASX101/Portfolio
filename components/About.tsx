@@ -2,6 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -17,26 +18,35 @@ const fadeUp: Variants = {
 };
 
 export default function About() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section
       id="about"
       style={{
-      fontFamily: '"ClashDisplay", sans-serif',
-      minHeight: "100dvh",
-      display: "flex",
-      alignItems: "flex-start",
-      paddingLeft: "8rem",
-      paddingRight: "8rem",
-      paddingTop: "10rem",
-      paddingBottom: "4rem",
-      boxSizing: "border-box",
-    }}
+        fontFamily: '"ClashDisplay", sans-serif',
+        minHeight: "100dvh",
+        display: "flex",
+        alignItems: "flex-start",
+        paddingLeft: isMobile ? "1.5rem" : "8rem",
+        paddingRight: isMobile ? "1.5rem" : "8rem",
+        paddingTop: "10rem",
+        paddingBottom: "4rem",
+        boxSizing: "border-box",
+      }}
     >
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "3fr 2fr",
-          gap: "4rem",
+          gridTemplateColumns: isMobile ? "1fr" : "3fr 2fr",
+          gap: isMobile ? "3rem" : "4rem",
           alignItems: "flex-start",
           width: "100%",
         }}
@@ -60,7 +70,7 @@ export default function About() {
           >
             About Me
           </motion.p>
-            
+
           <motion.h2
             variants={fadeUp}
             initial="hidden"
@@ -68,7 +78,7 @@ export default function About() {
             viewport={{ once: true }}
             custom={0.2}
             style={{
-              fontSize: "3rem",
+              fontSize: isMobile ? "2rem" : "3rem",
               fontWeight: 700,
               color: "white",
               marginBottom: "1.5rem",
@@ -96,8 +106,8 @@ export default function About() {
           >
             I am Asrar Azim, a Computer Science graduate from BRAC University
             with a deep interest in AI/ML and software engineering. My
-            undergraduate thesis focused on a Hybrid Spiking–Deep Neural
-            Network (Faster R-SNN) for autonomous driving — combining
+            undergraduate thesis focused on a Hybrid Spiking Deep Neural
+            Network (Faster R-SNN) for autonomous driving combining
             biological efficiency with deep learning accuracy.
           </motion.p>
 
@@ -113,11 +123,11 @@ export default function About() {
               color: "#9ca3af",
               lineHeight: 1.8,
               marginBottom: "2rem",
-              maxWidth: "100%", 
+              maxWidth: "100%",
             }}
           >
-            Beyond research, I love building full-stack web applications and
-            exploring how AI can be embedded into real-world products. 
+            Beyond research, I love building fullstack web applications and
+            exploring how AI can be embedded into realworld products.
           </motion.p>
 
           {/* Skills Summary */}
@@ -140,8 +150,6 @@ export default function About() {
               "Node.js", "Laravel", "MySQL",
               "Scikit-learn", "Pandas", "NumPy",
               "Seaborn", "Matplotlib", "YOLO",
-             
-
             ].map((skill) => (
               <span
                 key={skill}
@@ -162,7 +170,7 @@ export default function About() {
 
         {/* Right — Photo */}
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
@@ -189,19 +197,20 @@ export default function About() {
               position: "relative",
               zIndex: 1,
               width: "100%",
-              maxWidth: "380px",
+              maxWidth: isMobile ? "280px" : "380px",
               aspectRatio: "3/4",
               overflow: "hidden",
             }}
           >
             <Image
-                src="/profile.png"
-                alt="Asrar Azim"
-                fill
-                priority
-                loading="eager"
-                className="object-cover"
-                style={{ filter: "grayscale(20%)" }}
+              src="/profile.png"
+              alt="Asrar Azim"
+              fill
+              priority
+              loading="eager"
+              sizes="(max-width: 768px) 280px, 380px"
+              className="object-cover"
+              style={{ filter: "grayscale(20%)" }}
             />
           </div>
         </motion.div>

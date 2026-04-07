@@ -70,7 +70,7 @@ export default function Hero() {
         className="max-w-xl text-gray-400 text-lg mb-10 leading-relaxed"
       >
         CS Graduate specialized in AI/ML & Software Engineering.
-        I design and build things that live on the web — and sometimes teach
+        I design and build things that live on the web and sometimes teach
         machines to think.
       </motion.p>
 

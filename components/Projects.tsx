@@ -20,7 +20,7 @@ const projects = [
     number: "01",
     title: "Faster R-SNN",
     description:
-      "An undergraduate thesis project proposing a Hybrid Spiking–Deep Neural Network combining SNNs with Faster R-CNN architecture for energy-efficient object detection. Evaluated on the KITTI autonomous driving dataset, achieving mAP@0.5 of 0.7395 with improved power efficiency.",
+      "An undergraduate thesis project proposing a Hybrid Spiking Deep Neural Network combining SNNs with Faster R-CNN architecture for energy efficient object detection. Evaluated on the KITTI autonomous driving dataset, achieving mAP@0.5 of 0.7395 with improved power efficiency.",
     stack: ["Python", "PyTorch", "SNN", "Faster R-CNN", "KITTI"],
     github: "https://github.com/ASX101/Design-and-Analysis-of-a-Hybrid-Spiking-Deep-Neural-Network-for-Energy-Efficient-Object-Detection",
   },
@@ -28,7 +28,7 @@ const projects = [
     number: "02",
     title: "Community Skill Exchange Platform",
     description:
-      "A full-stack web platform where users can list their skills and request services from others in the community — enabling a barter-style skill exchange system without monetary transactions.",
+      "A fullstack web platform where users can list their skills and request services from others in the community enabling a barter style skill exchange system without monetary transactions.",
     stack: ["Laravel", "PHP", "MySQL", "HTML", "CSS", "JavaScript"],
     github: "https://github.com/ASX101/Community-Skill-Exchange-Platform",
   },
@@ -36,7 +36,7 @@ const projects = [
     number: "03",
     title: "Velocity Dash 3D",
     description:
-      "A 3D arcade racing game where players navigate through dynamic procedurally-generated race tracks, competing against opponents while dodging obstacles, collecting power-ups, and mastering challenging terrain. Features multiple race modes and a comprehensive progression system rendered using basic OpenGL primitives.",
+      "A 3D arcade racing game where players navigate through dynamic procedurally generated race tracks, competing against opponents while dodging obstacles, collecting power ups, and mastering challenging terrain. Features multiple race modes and a comprehensive progression system rendered using basic OpenGL primitives.",
     stack: ["C++", "OpenGL", "GLUT"],
     github: "https://github.com/ASX101/Velocity-Dash-3D---Extreme-Circuit-Racing",
   },

@@ -104,7 +104,7 @@ export default function Contact() {
         }}
       >
         I am currently open to new opportunities. Whether you have a question,
-        a project in mind, or just want to say hi — my inbox is always open.
+        a project in mind, or just want to say hi, my inbox is always open.
       </motion.p>
 
       {/* Main CTA Button */}
