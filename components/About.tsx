@@ -178,6 +178,7 @@ export default function About() {
             position: "relative",
             display: "flex",
             justifyContent: "center",
+            width: "100%",
           }}
         >
           {/* Accent border behind photo */}
@@ -186,8 +187,8 @@ export default function About() {
               position: "absolute",
               top: "16px",
               left: "16px",
-              right: "-16px",
-              bottom: "-16px",
+              right: isMobile ? "0px" : "-16px",
+              bottom: isMobile ? "0px" : "-16px",
               border: "1px solid #374151",
               zIndex: 0,
             }}
@@ -196,10 +197,12 @@ export default function About() {
             style={{
               position: "relative",
               zIndex: 1,
-              width: "100%",
+              width: isMobile ? "100%" : "100%",
               maxWidth: isMobile ? "280px" : "380px",
-              aspectRatio: "3/4",
+              height: isMobile ? "360px" : undefined,
+              aspectRatio: isMobile ? undefined : "3/4",
               overflow: "hidden",
+
             }}
           >
             <Image
