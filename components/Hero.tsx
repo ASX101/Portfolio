@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -16,6 +17,15 @@ const fadeUp: Variants = {
 };
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section
       style={{
@@ -24,9 +34,10 @@ export default function Hero() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        paddingLeft: "8rem",
-        paddingRight: "8rem",
-        paddingTop: "6rem",
+        paddingLeft: isMobile ? "1.5rem" : "8rem",
+        paddingRight: isMobile ? "1.5rem" : "8rem",
+        paddingTop: isMobile ? "7rem" : "6rem",
+        paddingBottom: isMobile ? "3rem" : "0",
         boxSizing: "border-box",
       }}
     >
@@ -35,8 +46,14 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={0.2}
-        style={{ fontFamily: "var(--font-mono, monospace)" }}
-        className="text-sm text-gray-500 mb-3 tracking-widest uppercase"
+        style={{
+          fontFamily: "var(--font-mono, monospace)",
+          fontSize: "12px",
+          color: "#6b7280",
+          letterSpacing: "0.15em",
+          textTransform: "uppercase",
+          marginBottom: "0.75rem",
+        }}
       >
         Hello, This is
       </motion.p>
@@ -46,7 +63,14 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={0.3}
-        className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight"
+        style={{
+          fontSize: isMobile ? "2.5rem" : "4.5rem",
+          fontWeight: 700,
+          color: "white",
+          marginBottom: "1rem",
+          letterSpacing: "-1px",
+          lineHeight: 1.1,
+        }}
       >
         Asrar Azim
       </motion.h1>
@@ -56,7 +80,14 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={0.5}
-        className="text-3xl md:text-5xl font-bold text-gray-600 mb-6 tracking-tight"
+        style={{
+          fontSize: isMobile ? "1.5rem" : "3rem",
+          fontWeight: 700,
+          color: "#4b5563",
+          marginBottom: "1.5rem",
+          letterSpacing: "-0.5px",
+          lineHeight: 1.2,
+        }}
       >
         I build intelligent systems.
       </motion.h2>
@@ -66,8 +97,14 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={0.7}
-        style={{ fontFamily: "var(--font-mono, monospace)" }}
-        className="max-w-xl text-gray-400 text-lg mb-10 leading-relaxed"
+        style={{
+          fontFamily: "var(--font-mono, monospace)",
+          fontSize: isMobile ? "12px" : "15px",
+          color: "#9ca3af",
+          lineHeight: 1.8,
+          marginBottom: "2.5rem",
+          maxWidth: "520px",
+        }}
       >
         CS Graduate specialized in AI/ML & Software Engineering.
         I design and build things that live on the web and sometimes teach
@@ -79,17 +116,21 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         custom={0.9}
-        style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}
+        style={{
+          display: "flex",
+          gap: isMobile ? "10px" : "16px",
+          flexWrap: "wrap",
+        }}
       >
         
         <a  href="/New_resume.pdf"
           style={{
             fontFamily: "var(--font-mono, monospace)",
             textDecoration: "none",
-            padding: "12px 24px",
+            padding: isMobile ? "10px 16px" : "12px 24px",
             border: "1px solid #374151",
             color: "#9ca3af",
-            fontSize: "14px",
+            fontSize: isMobile ? "11px" : "14px",
             transition: "all 0.2s",
           }}
           onMouseEnter={e => {
@@ -109,10 +150,10 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-mono, monospace)",
             textDecoration: "none",
-            padding: "12px 24px",
+            padding: isMobile ? "10px 16px" : "12px 24px",
             border: "1px solid #374151",
             color: "#9ca3af",
-            fontSize: "14px",
+            fontSize: isMobile ? "11px" : "14px",
             transition: "all 0.2s",
           }}
           onMouseEnter={e => {
@@ -132,10 +173,10 @@ export default function Hero() {
           style={{
             fontFamily: "var(--font-mono, monospace)",
             textDecoration: "none",
-            padding: "12px 24px",
+            padding: isMobile ? "10px 16px" : "12px 24px",
             border: "1px solid #374151",
             color: "#9ca3af",
-            fontSize: "14px",
+            fontSize: isMobile ? "11px" : "14px",
             transition: "all 0.2s",
           }}
           onMouseEnter={e => {

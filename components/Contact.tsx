@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -28,12 +29,21 @@ const socials = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/asrarazim",
+    value: "linkedin.com/in/asrar-azim",
     href: "https://linkedin.com/in/asrar-azim/",
   },
 ];
 
 export default function Contact() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section
       id="contact"
@@ -43,9 +53,9 @@ export default function Contact() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        paddingLeft: "8rem",
-        paddingRight: "8rem",
-        paddingTop: "10rem",
+        paddingLeft: isMobile ? "1.5rem" : "8rem",
+        paddingRight: isMobile ? "1.5rem" : "8rem",
+        paddingTop: isMobile ? "8rem" : "10rem",
         paddingBottom: "6rem",
         boxSizing: "border-box",
       }}
@@ -76,13 +86,13 @@ export default function Contact() {
         viewport={{ once: true }}
         custom={0.2}
         style={{
-          fontSize: "3.5rem",
+          fontSize: isMobile ? "2rem" : "3.5rem",
           fontWeight: 650,
           color: "white",
           marginBottom: "1.5rem",
           lineHeight: 1.1,
           letterSpacing: "-1px",
-          maxWidth: "600px",
+          maxWidth: isMobile ? "100%" : "600px",
         }}
       >
         Lets build something together.
@@ -96,11 +106,11 @@ export default function Contact() {
         custom={0.3}
         style={{
           fontFamily: "var(--font-mono, monospace)",
-          fontSize: "14px",
+          fontSize: isMobile ? "12px" : "14px",
           color: "#9ca3af",
           lineHeight: 1.8,
           marginBottom: "3rem",
-          maxWidth: "480px",
+          maxWidth: isMobile ? "100%" : "480px",
         }}
       >
         I am currently open to new opportunities. Whether you have a question,
@@ -120,11 +130,11 @@ export default function Contact() {
         <a  href="mailto:asrarazim15@gmail.com"
           style={{
             fontFamily: "var(--font-mono, monospace)",
-            fontSize: "14px",
+            fontSize: isMobile ? "12px" : "14px",
             color: "white",
             textDecoration: "none",
             border: "1px solid white",
-            padding: "14px 32px",
+            padding: isMobile ? "12px 24px" : "14px 32px",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
             transition: "all 0.2s",
@@ -174,8 +184,9 @@ export default function Contact() {
             key={social.label}
             style={{
               display: "flex",
-              alignItems: "center",
-              gap: "2rem",
+              alignItems: isMobile ? "flex-start" : "center",
+              flexDirection: isMobile ? "column" : "row",
+              gap: isMobile ? "0.25rem" : "2rem",
             }}
           >
             <span
@@ -196,10 +207,11 @@ export default function Contact() {
               rel="noopener noreferrer"
               style={{
                 fontFamily: "var(--font-mono, monospace)",
-                fontSize: "13px",
+                fontSize: isMobile ? "12px" : "13px",
                 color: "#9ca3af",
                 textDecoration: "none",
                 transition: "color 0.2s",
+                wordBreak: "break-all",
               }}
               onMouseEnter={e =>
                 ((e.target as HTMLAnchorElement).style.color = "white")

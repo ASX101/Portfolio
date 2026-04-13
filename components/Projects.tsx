@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -51,14 +52,23 @@ const projects = [
 ];
 
 export default function Projects() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section
       id="projects"
       style={{
         fontFamily: '"ClashDisplay", sans-serif',
         minHeight: "100dvh",
-        paddingLeft: "8rem",
-        paddingRight: "8rem",
+        paddingLeft: isMobile ? "1.5rem" : "8rem",
+        paddingRight: isMobile ? "1.5rem" : "8rem",
         paddingTop: "10rem",
         paddingBottom: "6rem",
         boxSizing: "border-box",
@@ -90,12 +100,12 @@ export default function Projects() {
         viewport={{ once: true }}
         custom={0.2}
         style={{
-          fontSize: "3rem",
+          fontSize: isMobile ? "2rem" : "3rem",
           fontWeight: 650,
           color: "white",
           marginBottom: "4rem",
           lineHeight: 1.1,
-          letterSpacing: "2px",
+          letterSpacing: isMobile ? "0px" : "2px",
         }}
       >
         Things I have built.
@@ -113,18 +123,20 @@ export default function Projects() {
             custom={0.1 * (index + 1)}
             style={{
               display: "grid",
-              gridTemplateColumns: "80px 1fr auto",
+              gridTemplateColumns: isMobile ? "1fr" : "80px 1fr auto",
               alignItems: "start",
-              gap: "2rem",
+              gap: isMobile ? "1rem" : "2rem",
               padding: "2.5rem 0",
               borderTop: "1px solid #1f2937",
               transition: "all 0.2s",
             }}
             onMouseEnter={e => {
-              (e.currentTarget as HTMLDivElement).style.paddingLeft = "1rem";
+              if (!isMobile)
+                (e.currentTarget as HTMLDivElement).style.paddingLeft = "1rem";
             }}
             onMouseLeave={e => {
-              (e.currentTarget as HTMLDivElement).style.paddingLeft = "0";
+              if (!isMobile)
+                (e.currentTarget as HTMLDivElement).style.paddingLeft = "0";
             }}
           >
             {/* Number */}
@@ -133,7 +145,7 @@ export default function Projects() {
                 fontFamily: "var(--font-mono, monospace)",
                 fontSize: "13px",
                 color: "#374151",
-                paddingTop: "4px",
+                paddingTop: isMobile ? "0" : "4px",
               }}
             >
               {project.number}
@@ -143,7 +155,7 @@ export default function Projects() {
             <div>
               <h3
                 style={{
-                  fontSize: "1.5rem",
+                  fontSize: isMobile ? "1.2rem" : "1.5rem",
                   fontWeight: 600,
                   color: "white",
                   marginBottom: "0.75rem",
@@ -155,7 +167,7 @@ export default function Projects() {
               <p
                 style={{
                   fontFamily: "var(--font-mono, monospace)",
-                  fontSize: "13px",
+                  fontSize: "12px",
                   color: "#9ca3af",
                   lineHeight: 1.8,
                   marginBottom: "1.25rem",
@@ -200,6 +212,8 @@ export default function Projects() {
                 letterSpacing: "0.05em",
                 transition: "all 0.2s",
                 whiteSpace: "nowrap",
+                display: "inline-block",
+                alignSelf: "flex-start",
               }}
               onMouseEnter={e => {
                 (e.target as HTMLAnchorElement).style.color = "white";

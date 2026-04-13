@@ -203,7 +203,7 @@ export default function About() {
             }}
           >
             <Image
-              src="/profile.png"
+              src="/profile.webp"
               alt="Asrar Azim"
               fill
               priority

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -54,14 +55,23 @@ const skillCategories = [
 ];
 
 export default function Skills() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section
       id="skills"
       style={{
         fontFamily: '"ClashDisplay", sans-serif',
         minHeight: "100dvh",
-        paddingLeft: "8rem",
-        paddingRight: "8rem",
+        paddingLeft: isMobile ? "1.5rem" : "8rem",
+        paddingRight: isMobile ? "1.5rem" : "8rem",
         paddingTop: "10rem",
         paddingBottom: "6rem",
         boxSizing: "border-box",
@@ -93,7 +103,7 @@ export default function Skills() {
         viewport={{ once: true }}
         custom={0.2}
         style={{
-          fontSize: "3rem",
+          fontSize: isMobile ? "2rem" : "3rem",
           fontWeight: 650,
           color: "white",
           marginBottom: "4rem",
@@ -116,8 +126,8 @@ export default function Skills() {
             custom={0.1 * (index + 1)}
             style={{
               display: "grid",
-              gridTemplateColumns: "220px 1fr",
-              gap: "2rem",
+              gridTemplateColumns: isMobile ? "1fr" : "220px 1fr",
+              gap: isMobile ? "0.75rem" : "2rem",
               padding: "2rem 0",
               borderTop: "1px solid #1f2937",
               alignItems: "start",
@@ -127,8 +137,8 @@ export default function Skills() {
             <span
               style={{
                 fontFamily: "var(--font-mono, monospace)",
-                fontSize: "12px",
-                color: "#6b7280",
+                fontSize: "11px",
+                color: isMobile ? "#4b5563" : "#6b7280",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 paddingTop: "4px",
@@ -150,10 +160,10 @@ export default function Skills() {
                   key={skill}
                   style={{
                     fontFamily: "var(--font-mono, monospace)",
-                    fontSize: "12px",
+                    fontSize: isMobile ? "11px" : "12px",
                     color: "#9ca3af",
                     border: "1px solid #1f2937",
-                    padding: "4px 12px",
+                    padding: isMobile ? "3px 8px" : "4px 12px",
                     letterSpacing: "0.05em",
                     transition: "all 0.2s",
                     cursor: "default",
